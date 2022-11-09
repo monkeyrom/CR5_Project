@@ -76,7 +76,7 @@ source $HOME/catkin_ws/devel/setup.bash
 ## Real Robotic Arm
 
 ### Dobot CR5 
-![Dobot CR5](./dobot.jpg)
+![Dobot CR5](./dobot1.jpg)
 
 ### Intel Realsense D435i
 ![Intel Realsense D435i](./dobot2.jpg)
