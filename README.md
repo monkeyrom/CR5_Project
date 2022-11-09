@@ -41,3 +41,42 @@ source $HOME/catkin_ws/devel/setup.bash
 ### rviz display
 
 ![rviz display](./rviz.png)
+
+### find object GUI
+
+![find-object](./find object.png)
+
+## 2.  Add object image for detection
+
+* Using find object gui for adding image
+  - > edit
+  - > add object from scene
+  - > take picture
+  - > crop object
+
+![find-object with object](./find object2.png)
+
+### tf synchronize
+
+![rviz display tf](./rviz2.png)
+
+## 3.  Run C++ file for control robot
+
+```sh
+    rosrun CR5_Project service_call.launch
+```
+
+* this command will run 2 nodes and spawn new terminal for commanding
+  - service_call
+  - main_control
+
+### new terminal for input command
+![new terminal](./main control.png)
+
+## Real Robotic Arm
+
+### Dobot CR5 
+![Dobot CR5](./dobot.jpg)
+
+### Intel Realsense D435i
+![Intel Realsense D435i](./dobot2.jpg)
