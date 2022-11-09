@@ -52,10 +52,10 @@ source $HOME/catkin_ws/devel/setup.bash
 ## 2.  Add object image for detection
 
 * Using find object gui for adding image
-  - > edit
-  - > add object from scene
-  - > take picture
-  - > crop object
+  > edit
+  > add object from scene
+  > take picture
+  > crop object
 
 ![find-object with object](./findobject2.png)
 
