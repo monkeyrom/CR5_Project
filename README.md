@@ -44,7 +44,7 @@ source $HOME/catkin_ws/devel/setup.bash
 
 ### find object GUI
 
-![find-object](./find object.png)
+![find-object](./findobject.png)
 
 ## 2.  Add object image for detection
 
@@ -54,7 +54,7 @@ source $HOME/catkin_ws/devel/setup.bash
   - > take picture
   - > crop object
 
-![find-object with object](./find object2.png)
+![find-object with object](./findobject2.png)
 
 ### tf synchronize
 
@@ -71,7 +71,7 @@ source $HOME/catkin_ws/devel/setup.bash
   - main_control
 
 ### new terminal for input command
-![new terminal](./main control.png)
+![new terminal](./maincontrol.png)
 
 ## Real Robotic Arm
 
