@@ -9,6 +9,9 @@ Dobot CR5 with Intel Realsense D435i for object detection and pose estimation (b
 ### Use git to clone the source code
 ```sh
 cd $HOME/catkin_ws/src
+git clone https://github.com/Dobot-Arm/CR_ROS.git
+git clone https://github.com/IntelRealSense/realsense-ros.git
+git clone https://github.com/introlab/find-object.git
 git clone https://github.com/monkeyrom/CR5_Project.git
 cd $HOME/catkin_ws
 ```
