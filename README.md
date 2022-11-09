@@ -40,4 +40,4 @@ source $HOME/catkin_ws/devel/setup.bash
 
 ### rviz display
 
-    (./rviz.png)
+    ![rviz display](https://github.com/monkeyrom/CR5_Project.git/rviz.png)
