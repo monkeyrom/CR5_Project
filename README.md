@@ -38,4 +38,6 @@ source $HOME/catkin_ws/devel/setup.bash
   - find object 2d
   - tf synchronisation
 
-    ![rviz display](./rviz.jpg)
+### RVIZ Display
+
+    ![rviz display](./rviz.png)
