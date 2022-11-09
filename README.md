@@ -65,7 +65,7 @@ source $HOME/catkin_ws/devel/setup.bash
 
 ![rviz display tf](./rviz2.png)
 
-## 3.  Run C++ file for control robot
+## 3.  Run a terminal for controlling robot
 
 ```sh
     rosrun CR5_Project service_call.launch
