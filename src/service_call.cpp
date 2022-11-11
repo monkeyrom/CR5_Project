@@ -63,14 +63,14 @@ void cmdCallback(const std_msgs::String::ConstPtr& msg)
 	  sprintf(cmd_spdJ, "gnome-terminal --tab -e 'rosservice call dobot_bringup/srv/SpeedJ \"r: 100 \"'");
 	  system(cmd_spdJ);
   }
-  if (cmd == "Speed50"){
+  if (cmd == "Speed80"){
 	  char cmd_spdJ[200];
-	  sprintf(cmd_spdJ, "gnome-terminal --tab -e 'rosservice call dobot_bringup/srv/SpeedJ \"r: 50 \"'");
+	  sprintf(cmd_spdJ, "gnome-terminal --tab -e 'rosservice call dobot_bringup/srv/SpeedJ \"r: 80 \"'");
 	  system(cmd_spdJ);
   }
   if (cmd == "inventory"){
     char cmd[200];
-    sprintf(cmd, "gnome-terminal --tab -e 'rosservice call dobot_bringup/srv/MovJ \"{x: 264.0, y: -310.0, z: 96.0, a: 180.0, b: 0.0, c: 180.0}\"'");
+    sprintf(cmd, "gnome-terminal --tab -e 'rosservice call dobot_bringup/srv/MovJ \"{x: -230.0, y: -620.0, z: 300.0, a: 180.0, b: 0.0, c: 180.0}\"'");
     system(cmd);
   }
   if (cmd == "inventory2"){
