@@ -296,7 +296,13 @@ int picking_object (int object_id, int box_count)
 	int place = 0;
 	int box = box_count;
 	int box_stack;
-					
+	int obj_x;
+	int obj_y;
+	int obj_z;
+	int obj_rx;
+	int obj_ry;
+	int obj_rz;
+
 	while (place == 0)
 	{
 		if (carry == 0 && echoListener.tf.waitForTransform(source_frameid, final_target, ros::Time(), ros::Duration(0.2)) == 1)
@@ -464,7 +470,7 @@ int picking_object (int object_id, int box_count)
 
 			int goal_x_cal = goal_x;
 			int goal_y_cal = goal_y;
-			int goal_z_cal = goal_z + 54;
+			int goal_z_cal = goal_z + 53;
 			int goal_rx_cal = goal_pitch + 180;
 			int goal_ry_cal = goal_yall - 180;
 			int goal_rz_cal = goal_roll + 180;
@@ -481,37 +487,60 @@ int picking_object (int object_id, int box_count)
 
 			ROS_INFO("Picking Object at x:[%f], y:[%f], z:[%f], rx:[%f], ry:[%f], rz:[%f]", msg.x, msg.y, msg.z, msg.rx, msg.ry, msg.rz);
 			chatter_pub1.publish(msg);
-			
+
 			usleep(1000000);
 			std_msgs::String msg;
 			std::stringstream cmd;
     		cmd << "SetVac";
 			msg.data = cmd.str();
 			chatter_pub2.publish(msg);
-			ROS_INFO("Picked object");
 
 			checkpose(goal_x_cal,goal_y_cal,goal_z_cal);
+			ROS_INFO("Picked object");
+
+			obj_x = goal_x_cal;
+			obj_y = goal_y_cal;
+			obj_z = goal_z_cal;
+			obj_rx = goal_rx_cal;
+			obj_ry = goal_ry_cal;
+			obj_rz = goal_rz_cal;
 
 			carry = 3;
 		}
 
 		if (carry == 3)
 		{
-			usleep(100000);
+			int goal_x_cal = obj_x;
+			int goal_y_cal = obj_y;
+			int goal_z_cal = obj_z + 100;
+			int goal_rx_cal = obj_rx;
+			int goal_ry_cal = obj_ry;
+			int goal_rz_cal = obj_rz;
 
-			carry = 4;
+			msg.x = goal_x_cal;
+			msg.y = goal_y_cal;
+			msg.z = goal_z_cal;
+			msg.rx = goal_rx_cal;
+			msg.ry = goal_ry_cal;
+			msg.rz = goal_rz_cal;
+
+			chatter_pub1.publish(msg);
+			checkpose(goal_x_cal,goal_y_cal,goal_z_cal);
+			usleep(200000);
+
+			carry = 5;
 		}
-
+/*
 		if (carry == 4)
 		{
 			std_msgs::String msg;
 			std::stringstream cmd;
-			cmd << "home";
+			cmd << "inventory";
 			msg.data = cmd.str();
 			chatter_pub2.publish(msg);			
-			checkpose(143,-580,405);
+			checkpose(-230,-620,300);
 
-			carry = 5;
+			carry = 6;
 		}
 
 		if (carry == 5)
@@ -556,26 +585,26 @@ int picking_object (int object_id, int box_count)
 			msg.data = cmd.str();
 			chatter_pub2.publish(msg);
 			ROS_INFO("Placed object");
-			usleep(200000);
+			usleep(100000);
 
-			carry = 6;
-		}
-		
-		if (carry == 6)
+			carry = 7;
+		} 
+*/
+		if (carry == 5)
 		{
 			int goal_x;
 			int goal_y;
-			goal_x = -180;
+			goal_x = -230;
 
-			if (object_id == 1){goal_y = -710;}
-			if (object_id == 2){goal_y = -710;}
-			if (object_id == 3){goal_y = -540;}
+			if (object_id == 1){goal_y = -720;}
+			if (object_id == 2){goal_y = -720;}
+			if (object_id == 3){goal_y = -540;}		//170
 			if (object_id == 4){goal_y = -540;}
 			if (object_id == 5){goal_y = -540;}
 
 			int goal_x_cal = goal_x;
 			int goal_y_cal = goal_y;
-			int goal_z_cal = 200;
+			int goal_z_cal = 160;
 			int goal_rx_cal = 180;
 			int goal_ry_cal = 0;
 			int goal_rz_cal = 180;
@@ -587,14 +616,22 @@ int picking_object (int object_id, int box_count)
 			msg.ry = goal_ry_cal;
 			msg.rz = goal_rz_cal;
 
+			ROS_INFO("Placing Object at x:[%f], y:[%f], z:[%f], rx:[%f], ry:[%f], rz:[%f]", msg.x, msg.y, msg.z, msg.rx, msg.ry, msg.rz);
 			chatter_pub1.publish(msg);
 			checkpose(goal_x_cal,goal_y_cal,goal_z_cal);
-			usleep(200000);
+			
+			std_msgs::String msg;
+			std::stringstream cmd;
+    		cmd << "ResetVac";
+			msg.data = cmd.str();
+			chatter_pub2.publish(msg);
+			ROS_INFO("Placed object");
+			usleep(100000);
 
-			carry = 7;
+			carry = 6;
 		}
 
-		if (carry == 7)
+		if (carry == 6)
 		{	
 			ROS_INFO("Go Home");
 
@@ -604,16 +641,16 @@ int picking_object (int object_id, int box_count)
 			msg.data = cmd.str();
 			chatter_pub2.publish(msg);			
 			checkpose(143,-580,405);
-			usleep(200000);
+			usleep(500000);
 
 			carry = 0;
 			place = 1;
 			box_stack = box;
 		}
 	}
-
+	place = 1;
 	ROS_INFO("Picking done");
-	return box_stack;
+	//return box_stack;
 }
 
 int main(int argc, char **argv)
@@ -810,37 +847,49 @@ int main(int argc, char **argv)
 			int box5 = 0;
 			int box_stack;
 
+			std_msgs::String msg;
+			std::stringstream cmd;
+    		cmd << "Speed80";
+			msg.data = cmd.str();
+			chatter_pub2.publish(msg);
+			ROS_INFO("Set SpeedJ 80");
+
 			while (ros::ok) 
 			{
 				if (echoListener.tf.waitForTransform(source_frameid, target_frameid, ros::Time(), ros::Duration(0.2)) == 1)
 				{
-					box1 += 25;
-					box_stack = picking_object(1, box1);
-					box1 = box1 - 25 + box_stack;
+					//box1 += 25;
+					//box_stack = picking_object(1, box1);
+					//box1 = box1 - 25 + box_stack;
+					picking_object(1, box1);
 				}
 				else if (echoListener.tf.waitForTransform(source_frameid, target_frameid2, ros::Time(), ros::Duration(0.2)) == 1)
 				{
-					box1 += 25;
-					box_stack = picking_object(2, box1);
-					box1 = box1 - 25 + box_stack;
+					//box1 += 25;
+					//box_stack = picking_object(2, box1);
+					//box1 = box1 - 25 + box_stack;
+					picking_object(2, box1);
 				}
 				else if (echoListener.tf.waitForTransform(source_frameid, target_frameid3, ros::Time(), ros::Duration(0.2)) == 1)
 				{
-					box2 += 30;
-					box_stack = picking_object(3, box2);
-					box2 = box2 - 30 + box_stack;
+					//box2 += 30;
+					//box_stack = picking_object(3, box2);
+					//box2 = box2 - 30 + box_stack;
+					picking_object(3, box2);
 				}
 				else if (echoListener.tf.waitForTransform(source_frameid, target_frameid4, ros::Time(), ros::Duration(0.2)) == 1)
 				{
-					box2 += 25;
-					box_stack = picking_object(4, box2);
-					box2 = box2 - 25 + box_stack;
+					//box2 += 25;
+					//box_stack = picking_object(4, box2);
+					//box2 = box2 - 25 + box_stack;
+					picking_object(4, box2);
 				}
 				else if (echoListener.tf.waitForTransform(source_frameid, target_frameid5, ros::Time(), ros::Duration(0.2)) == 1)
 				{
-					box2 += 50;
-					box_stack = picking_object(5, box2);
-					box2 = box2 - 50 + box_stack;
+					//box2 += 50;
+					//box_stack = picking_object(5, box2);
+					//box2 = box2 - 50 + box_stack;
+					picking_object(5, box2);
 				}
 			}
 		}
