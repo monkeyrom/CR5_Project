@@ -87,5 +87,5 @@ source $HOME/catkin_ws/devel/setup.bash
 ![Intel Realsense D435i](./dobot2.jpg)
 
 # References
-- **CR_ROS**: https://github.com/monkeyrom/CR_ROS
-- **find-object**: https://github.com/monkeyrom/find-object
+- **CR_ROS**: https://github.com/Dobot-Arm/CR_ROS
+- **find-object**: https://github.com/introlab/find-object
