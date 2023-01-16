@@ -6,7 +6,10 @@ This project is present the robot arm application especially bin-picking base on
 
 # Building
 
-## ubuntu 20.04
+## Requirement
+
+- ubuntu 20.04
+- ROS noetic
 
 ### Use git to clone the source code
 ```sh
